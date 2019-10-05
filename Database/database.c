@@ -1,7 +1,7 @@
 /*
  * database.c
  *
- *  Created on: 2019-10-04T11:23:44.378Z
+ *  Created on: 2019-10-05T20:40:13.446Z
  *      Author: AlexL
  */
 
@@ -30,7 +30,7 @@
 //#define DB_TRACE
 //#undef DB_TRACE
 
-#define DEBUG_TRACE
+#define NONE
 #ifdef DEBUG_TRACE
 	#define TRACE(trace)	do{\
 								trace;\
@@ -39,7 +39,7 @@
 	#define TRACE(trace)
 #endif
 
-static DbTable_st *dbIndexTable;
+DbTable_st *dbIndexTable;
 
 DbTable_st * getDbInstance(){
 	return dbIndexTable;
@@ -289,13 +289,13 @@ static Parcel_st dbParcel[1];
 static Train_st dbTrain;
 static Parcel_st* pBox[1];
 void dbStationInit(void){
-	fillDepot(&dbTrain);
 	dbTrain.box = pBox;
 	for(uint16_t iParcel=0;iParcel<1;iParcel++){
 		dbTrain.box[iParcel] = (Parcel_st*)&dbParcel[iParcel];
 	}
 	dbTrain.capacity = 1;
 	dbTrain.route = ROUTE_DATABASE;
+	fillDepot(&dbTrain);
 	reindex(dbConfig,sizeof(dbConfig));
 }
 

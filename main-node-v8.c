@@ -1,7 +1,7 @@
 /*
  * TrainFramework test
  * 
- * 2019-10-04T11:23:44.389Z
+ * 2019-10-05T20:40:13.504Z
  */
 
 #include <stdio.h>
@@ -47,6 +47,13 @@ int main(void) {
 		filesStation(NULL);
 		dbStation(NULL);
 		mqttStation(NULL);
+
+		tcpProxyStation();
+
+		sleep(1);
+		printf("loop\r\n");
+  	fflush(stdout);
+
 	}
 
 	return EXIT_SUCCESS;

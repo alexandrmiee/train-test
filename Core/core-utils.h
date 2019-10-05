@@ -34,16 +34,17 @@
 											}\
 										}while(0)
 #else
-	#ifdef DEBUG_TRACE
+	// #ifdef DEBUG_TRACE
 		#define TR(trace)	do{\
 									trace;\
 								}while(0)
-	#else
+	// #else
 		#define TR(trace)
-	#endif
+	// #endif
 	#define try(express,exception,exit) do{\
 											if(!express){\
-												TR(printf(exception" in line %d of file \"%s\".\n",__LINE__, __FILE__););\
+												TR(printf(exception" in line %d of file \"%s\".\r\n",__LINE__, __FILE__););\
+  											fflush(stdout);\
 												return exit;\
 											}\
 										}while(0)

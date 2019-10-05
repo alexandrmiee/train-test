@@ -1,7 +1,7 @@
 /*
  * files.c
  *
- *  Created on: 2019-10-04T11:23:44.379Z
+ *  Created on: 2019-10-05T20:40:13.450Z
  *      Author: AL
  */
 
@@ -28,7 +28,7 @@
 #include "flash.h"
 
 
-#define DEBUG_TRACE
+#define NONE
 #ifdef DEBUG_TRACE
 	#define TRACE(trace)	do{\
 								trace;\
@@ -385,13 +385,14 @@ static Parcel_st filesParcel[4];
 static Train_st filesTrain;
 static Parcel_st *pBox[4];
 void filesStationInit(void){
-	fillDepot(&filesTrain);
 	filesTrain.box = pBox;//malloc(sizeof(Parcel_st*)*4);
 	for(uint16_t iParcel=0;iParcel<4;iParcel++){
 		filesTrain.box[iParcel] = (Parcel_st*)&filesParcel[iParcel];
 	}
 	filesTrain.capacity = 4;
 	filesTrain.route = ROUTE_FILES;
+	fillDepot(&filesTrain);
+
 }
 
 /*

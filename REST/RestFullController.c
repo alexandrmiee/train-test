@@ -1,7 +1,7 @@
 /*
  * RestFullController.c
  *
- *  Created on: 3 èþë. 2018 ã.
+ *  Created on: 3 ï¿½ï¿½ï¿½. 2018 ï¿½.
  *      Author: home
  */
 
@@ -43,17 +43,24 @@ int restParser(
 	char* command, char *restToken,
 	char **argv, uint8_t *argc, uint8_t argcLen
 ){
+	// printf("\r\n\trequest %s\r\n\tcommand %s \r\n\t%p %d %s\r\n",request, command,restBuf,argcLen,command);
+  // fflush(stdout);
+
 	uint16_t reqLen = strlen(request);
 	//if(reqLen>restBufLen) try( (0),"Rest Parser error: request size >rest buffer size\n",EXIT_FAILURE);
 
 	try( (request),"Rest Parser error: null pointer request\n",EXIT_FAILURE);
 	try( (restBuf),"Rest Parser error: null pointer restBuf\n",EXIT_FAILURE);
 	try( (argcLen),"Rest Parser error: null argcLen\n",EXIT_FAILURE);
+	printf("\r\n\ request %s command %s restBuf %p argcLen %d command %s\r\n",request, command,restBuf,argcLen,command);
+  fflush(stdout);
 	char *cmdPos = strstr(request,command);
+	printf("%s\r\n",cmdPos);
+  fflush(stdout);
+
 	if(command){
 		try( (cmdPos),"Rest Parser error: command in request not found\n",EXIT_FAILURE);
 	}//else if command = null skip checking
-
 //	if(reqLen>restBufLen) printf("Rest Parser warning: request size >rest buffer size\n");
 	restBuf = cmdPos;
 
@@ -62,8 +69,11 @@ int restParser(
 	while (p!= NULL){
 		argv[*argc]= cmdPos+(p-restBuf);
 		*argc += 1;
+			printf("%d\r\n",argc);
+  		fflush(stdout);
 		if((*argc)>=argcLen){
-//			printf("Rest Parser: REST_MAX_PARAMS limit reached\n");
+			printf("Rest Parser: REST_MAX_PARAMS limit reached\t\n");
+  		fflush(stdout);
 			p = strtok(NULL, "");
 			argv[*argc]= cmdPos+(p-restBuf);
 			return EXIT_FAILURE;
